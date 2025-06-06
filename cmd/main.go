@@ -33,6 +33,8 @@ func main() {
 	ctx, span := telem.TraceStart(ctx, "main")
 	defer span.End()
 	span.AddEvent("starting main function")
+	span.AddEvent("doing some work")
+	span.AddEvent("work done")
 
 	// Simulate some work
 

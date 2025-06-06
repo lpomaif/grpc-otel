@@ -6,9 +6,31 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"context"
+
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/semconv/v1.20.0/httpconv"
+	"go.opentelemetry.io/otel/trace"
 )
+
+// GetParentSpanFromContext retrieves the parent span from the gin context, if any.
+func GetParentSpanFromContext(c *gin.Context) trace.Span {
+	span := trace.SpanFromContext(c.Request.Context())
+	return span
+}
+
+// PropagateParentSpan is a gin middleware that extracts the parent span from the incoming request context
+// and sets it into the gin context for downstream handlers to use.
+func (t *Telemetry) PropagateParentSpan() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		parentSpan := GetParentSpanFromContext(c)
+		if parentSpan != nil && parentSpan.SpanContext().IsValid() {
+			ctx := trace.ContextWithSpan(context.Background(), parentSpan)
+			c.Request = c.Request.WithContext(ctx)
+		}
+		c.Next()
+	}
+}
 
 // LogRequest is a gin middleware that logs the request path.
 func (t *Telemetry) LogRequest() gin.HandlerFunc {

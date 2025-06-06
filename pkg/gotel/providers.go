@@ -18,10 +18,7 @@ import (
 
 // newLoggerProvider creates a new logger provider with the OTLP gRPC exporter.
 func newLoggerProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*log.LoggerProvider, error) {
-	exporter, err := otlploggrpc.New(ctx,
-		otlploggrpc.WithEndpoint(cfg.GrpcUrl), // Adjust the endpoint as needed
-		otlploggrpc.WithTimeout(cfg.Timeout),  // Timeout is in seconds
-	)
+	exporter, err := otlploggrpc.New(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP log exporter: %w", err)
 	}
@@ -37,10 +34,7 @@ func newLoggerProvider(ctx context.Context, res *resource.Resource, cfg *Config)
 
 // newMeterProvider creates a new meter provider with the OTLP gRPC exporter.
 func newMeterProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*metric.MeterProvider, error) {
-	exporter, err := otlpmetricgrpc.New(ctx,
-		otlpmetricgrpc.WithEndpoint(cfg.GrpcUrl), // Adjust the endpoint as needed
-		otlpmetricgrpc.WithTimeout(cfg.Timeout),  // Timeout is in seconds
-	)
+	exporter, err := otlpmetricgrpc.New(ctx)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP metric exporter: %w", err)
@@ -57,10 +51,7 @@ func newMeterProvider(ctx context.Context, res *resource.Resource, cfg *Config) 
 
 // newTracerProvider creates a new tracer provider with the OTLP gRPC exporter.
 func newTracerProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*trace.TracerProvider, error) {
-	exporter, err := otlptracegrpc.New(ctx,
-		otlptracegrpc.WithEndpoint(cfg.GrpcUrl), // Adjust the endpoint as needed
-		otlptracegrpc.WithTimeout(cfg.Timeout),  // Timeout is in seconds
-	)
+	exporter, err := otlptracegrpc.New(ctx)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP trace exporter: %w", err)

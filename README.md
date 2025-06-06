@@ -1,5 +1,6 @@
 # README
 
+* https://github.com/open-telemetry/opentelemetry-specification/blob/v1.21.0/specification/protocol/exporter.md
 
 ## Installaton
 

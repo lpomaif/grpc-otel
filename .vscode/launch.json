@@ -14,8 +14,16 @@
                 "TELEMETRY_SERVICE_NAME": "demonstration",
                 "TELEMETRY_SERVICE_VERSION": "0.0.1",
                 "TELEMETRY_ENVIRONMENT": "development",
-                "TELEMETRY_ENABLED": "true",
-                "TELEMETRY_GRPC_URL": "localhost:4317"
+
+                "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4317",
+                // "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otel-grpc.build.data-tracing-collector.apps.maif.local:443",
+                "OTEL_EXPORTER_OTLP_INSECURE": "true",
+                "OTEL_EXPORTER_OTLP_TIMEOUT": "10",
+                "OTEL_EXPORTER_OTLP_PROTOCOL": "grpc", // "http/protobuf", "http/json", "grpc"
+
+                // "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "localhost:4317",
+                // "OTEL_EXPORTER_OTLP_METRICS_ENDPOINT": "localhost:4317",
+                // "OTEL_EXPORTER_OTLP_LOGS_ENDPOINT": "localhost:4317"
             }
         }
     ]
