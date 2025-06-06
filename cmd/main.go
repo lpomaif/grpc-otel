@@ -37,5 +37,9 @@ func main() {
 	span.AddEvent("work done")
 
 	// Simulate some work
+	counter, err := telem.MeterInt64UpDownCounter(gotel.MetricRequestsInFlight)
+	counter.Add(ctx, 1)
+	telem.LogInfo("request in flight counter incremented")
+	counter.Add(ctx, 1)
 
 }

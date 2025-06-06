@@ -10,3 +10,6 @@
 ```bash
 go install github.com/ymtdzzz/otel-tui@latest
 ```
+
+
+
