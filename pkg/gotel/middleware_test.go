@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTelemetry_LogRequest(t *testing.T) {
+func TestTelemetryLogRequest(t *testing.T) {
 	t.Run("logs request info", func(t *testing.T) {
 		// Setup
 		gin.SetMode(gin.TestMode)
@@ -39,7 +39,7 @@ func TestTelemetry_LogRequest(t *testing.T) {
 	})
 }
 
-func TestTelemetry_MeterRequestDuration(t *testing.T) {
+func TestTelemetryMeterRequestDuration(t *testing.T) {
 	t.Run("records request duration", func(t *testing.T) {
 		// Setup
 		gin.SetMode(gin.TestMode)
@@ -68,7 +68,7 @@ func TestTelemetry_MeterRequestDuration(t *testing.T) {
 	})
 }
 
-func TestTelemetry_MeterRequestsInFlight(t *testing.T) {
+func TestTelemetryMeterRequestsInFlight(t *testing.T) {
 	t.Run("tracks concurrent requests", func(t *testing.T) {
 		// Setup
 		gin.SetMode(gin.TestMode)
