@@ -18,7 +18,9 @@ import (
 
 // newLoggerProvider creates a new logger provider with the OTLP gRPC exporter.
 func newLoggerProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*log.LoggerProvider, error) {
-	exporter, err := otlploggrpc.New(ctx)
+	exporter, err := otlploggrpc.New(ctx,
+		otlploggrpc.WithInsecure(), // Use WithInsecure for local development, change for production
+	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP log exporter: %w", err)
 	}
@@ -34,8 +36,9 @@ func newLoggerProvider(ctx context.Context, res *resource.Resource, cfg *Config)
 
 // newMeterProvider creates a new meter provider with the OTLP gRPC exporter.
 func newMeterProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*metric.MeterProvider, error) {
-	exporter, err := otlpmetricgrpc.New(ctx)
-
+	exporter, err := otlpmetricgrpc.New(ctx,
+		otlpmetricgrpc.WithInsecure(), // Use WithInsecure for local development, change for production
+	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP metric exporter: %w", err)
 	}
@@ -51,7 +54,9 @@ func newMeterProvider(ctx context.Context, res *resource.Resource, cfg *Config) 
 
 // newTracerProvider creates a new tracer provider with the OTLP gRPC exporter.
 func newTracerProvider(ctx context.Context, res *resource.Resource, cfg *Config) (*trace.TracerProvider, error) {
-	exporter, err := otlptracegrpc.New(ctx)
+	exporter, err := otlptracegrpc.New(ctx,
+		otlptracegrpc.WithInsecure(), // Use WithInsecure for local development, change for production
+	)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP trace exporter: %w", err)
