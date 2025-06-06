@@ -25,5 +25,15 @@ func main() {
 	}
 	defer telem.Shutdown(ctx)
 
+	// Logging and tracing initialization
+	telem.LogInfo("telemetry initialized with service name:", telem.GetServiceName())
 	telem.LogInfo("telemetry initialized")
+
+	// Example of using the telemetry provider
+	ctx, span := telem.TraceStart(ctx, "main")
+	defer span.End()
+	span.AddEvent("starting main function")
+
+	// Simulate some work
+
 }

@@ -15,7 +15,7 @@ type NoopTelemetry struct {
 }
 
 // NewNoopTelemetry creates a new NoopTelemetry instance.
-func NewNoopTelemetry(cfg Config) (*NoopTelemetry, error) {
+func NewNoopTelemetry(cfg *Config) (*NoopTelemetry, error) {
 	return &NoopTelemetry{serviceName: cfg.ServiceName}, nil
 }
 

@@ -11,7 +11,7 @@
             "mode": "auto",
             "program": "${workspaceFolder}/cmd/main.go",
             "env": {
-                "TELEMETRY_SERVICE_NAME": "gotel",
+                "TELEMETRY_SERVICE_NAME": "demonstration",
                 "TELEMETRY_SERVICE_VERSION": "0.0.1",
                 "TELEMETRY_ENVIRONMENT": "development",
                 "TELEMETRY_ENABLED": "true",

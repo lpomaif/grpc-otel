@@ -19,15 +19,20 @@ import (
 // TelemetryProvider is an interface for the telemetry provider.
 type TelemetryProvider interface {
 	GetServiceName() string
+
 	LogInfo(args ...interface{})
 	LogErrorln(args ...interface{})
 	LogFatalln(args ...interface{})
+
 	MeterInt64Histogram(metric Metric) (otelmetric.Int64Histogram, error)
 	MeterInt64UpDownCounter(metric Metric) (otelmetric.Int64UpDownCounter, error)
+
 	TraceStart(ctx context.Context, name string) (context.Context, oteltrace.Span)
+
 	LogRequest() gin.HandlerFunc
 	MeterRequestDuration() gin.HandlerFunc
 	MeterRequestsInFlight() gin.HandlerFunc
+
 	Shutdown(ctx context.Context)
 }
 
@@ -40,11 +45,11 @@ type Telemetry struct {
 	log    *zap.SugaredLogger
 	meter  otelmetric.Meter
 	tracer oteltrace.Tracer
-	cfg    Config
+	cfg    *Config
 }
 
 // NewTelemetry creates a new telemetry instance.
-func NewTelemetry(ctx context.Context, cfg Config) (*Telemetry, error) {
+func NewTelemetry(ctx context.Context, cfg *Config) (*Telemetry, error) {
 	rp := newResource(cfg)
 
 	lp, err := newLoggerProvider(ctx, rp, cfg)
